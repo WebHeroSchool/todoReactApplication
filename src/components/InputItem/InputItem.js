@@ -26,11 +26,11 @@ class InputItem extends React.Component {
 	};
 
 	onButtonClick = () => {
-		
+		this.props.onClickAdd(this.state.inputValue.toLowerCase());
 		this.setState({ 
 			inputValue: ''
 		});
-		this.props.onClickAdd(this.state.inputValue.toLowerCase());
+		
 	}
 
 	render () {
