@@ -1,0 +1,17 @@
+.wrap {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.case {
+	max-width: 250px;
+}
+.item {
+	color: #333;
+	width: 100%;
+}
+.done {
+	color: #c4c4c4;
+	text-decoration: line-through;
+}
+

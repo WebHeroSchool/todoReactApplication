@@ -1,0 +1,10 @@
+.field {
+	width: 360px;
+}
+.form {
+	  position: relative;
+	  padding: 5px;
+	  text-align: center;
+	  color:#FF0000;
+	  margin-bottom: 10px;
+}

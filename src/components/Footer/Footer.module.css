@@ -1,0 +1,13 @@
+.counter {
+	margin: 0 0 10px 0;
+	color: #c4c4c4;
+}
+.filter {
+	margin: 0 0 10px 0;
+	display: flex;
+	justify-content: flex-end;
+}
+.delete {
+	display: flex;
+	justify-content: flex-end;
+}
