@@ -24,10 +24,9 @@ const Item = ({ value, isDone, onClickDone, id, onClickDelete }) => (
 			{value}
 		</div>
 	</div>
-	<div className={styles.delete_icon}>
+	<div onClick={() => onClickDelete(id)} className={styles.delete_icon}>
 		<IconButton aria-label="delete">
-  	    	<DeleteIcon 
-  	    		onClick={() => onClickDelete(id)} />
+  	    	<DeleteIcon />
   	    </IconButton>
 	</div>
 
