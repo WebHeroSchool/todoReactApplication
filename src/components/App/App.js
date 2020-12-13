@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ItemList from '../ItemList/ItemList';
 import InputItem from '../InputItem/InputItem';
 import Footer from '../Footer/Footer';
@@ -77,4 +78,14 @@ class App extends React.Component {
 			</div>);
 	}
 }
+
+App.defaultProps = {
+	isDone: false
+};
+
+App.propTypes = {
+	  isDone: PropTypes.bool,
+	  id: PropTypes.number
+};
+
 export default App;

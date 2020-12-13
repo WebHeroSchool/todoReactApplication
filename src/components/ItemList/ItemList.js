@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Item from '../Item/Item';
 import styles from './ItemList.module.css';
 
@@ -13,5 +14,17 @@ const ItemList = ({items, onClickDone, onClickDelete}) => (<ul className={styles
 		/>
 	</li>)}
 </ul>);
+
+ItemList.defaultProps = {
+	items: [
+				{
+					value: 'задание не добавлено'
+				}
+	]
+};
+
+ItemList.propTypes = {
+	items: PropTypes.array
+};
 
 export default ItemList;
