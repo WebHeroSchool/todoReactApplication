@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Item from '../Item/Item';
 import styles from './ItemList.module.css';
 
@@ -20,6 +21,10 @@ ItemList.defaultProps = {
 					value: 'задание не добавлено'
 				}
 	]
-}
+};
+
+ItemList.propTypes = {
+	items: PropTypes.array
+};
 
 export default ItemList;
