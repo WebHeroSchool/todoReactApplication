@@ -21,6 +21,18 @@ const styleButton = {
 };
 
 class InputItem extends React.Component {
+	componentDidMount () {
+		console.log('componentDidMount');
+	}
+
+	componentDidUpdate() {
+		console.log('componentDidUpdate');
+	}
+
+	componentWillUnmount() {
+		console.log('componentWillUnmount');
+	}
+	
 	state = {
 		inputValue: ''
 	};

@@ -18,24 +18,41 @@ const style = {
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
 };
 
-const Footer = ({ count}) => (
-	<div>
-		<div className={styles.counter}>
-			Осталось выполнить вот столько дел: { count }
-		</div>
-		<div className={styles.filter}>
-			<ButtonGroup color="secondary" aria-label="outlined secondary button group">
-				<Button style={style}>Все</Button>
-				<Button style={style}>Активные</Button>
-				<Button style={style}>Выполненные</Button>
-			</ButtonGroup>
-		</div>
-		<div className={styles.delete}>
-			<Button style={style} variant="outlined" color="secondary">
-	  			Удалить выполненные дела
-			</Button>
-		</div>
-	</div>);
+class Footer extends React.Component {
+	componentDidMount () {
+		console.log('componentDidMount');
+	}
+
+	componentDidUpdate() {
+		console.log('componentDidUpdate');
+	}
+
+	componentWillUnmount() {
+		console.log('componentWillUnmount');
+	}
+	
+	render () {
+		const { count } = this.props;
+		return (
+			<div>
+				<div className={styles.counter}>
+					Осталось выполнить вот столько дел: { count }
+				</div>
+				<div className={styles.filter}>
+					<ButtonGroup color="secondary" aria-label="outlined secondary button group">
+						<Button style={style}>Все</Button>
+						<Button style={style}>Активные</Button>
+						<Button style={style}>Выполненные</Button>
+					</ButtonGroup>
+				</div>
+				<div className={styles.delete}>
+					<Button style={style} variant="outlined" color="secondary">
+			  			Удалить выполненные дела
+					</Button>
+				</div>
+			</div>);
+	}
+};
 
 Footer.propTypes = {
 	count: PropTypes.number.isRequired
