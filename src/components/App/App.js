@@ -9,7 +9,7 @@ class App extends React.Component {
 	state = {
 		items: [
 				{
-					value: 'Создать новое приложение',
+					value: 'cоздать новое приложение',
 					isDone: false,
 					id: 1
 				},
@@ -19,7 +19,7 @@ class App extends React.Component {
 					id: 2
 				},
 				{
-					value: 'сделать все дела',
+					value: 'помыть машину',
 					isDone: false,
 					id: 3
 				}
