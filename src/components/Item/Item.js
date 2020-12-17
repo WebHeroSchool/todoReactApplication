@@ -7,18 +7,18 @@ import classnames from 'classnames';
 import styles from './Item.module.css';
 
 class Item extends React.Component {
-	componentDidMount () {
-		this.timerID = setInterval(() => console.log('interval'), 1000);
-	}
+	// componentDidMount () {
+	// 	this.timerID = setInterval(() => console.log('interval'), 1000);
+	// }
 
-	componentDidUpdate() {
-		console.log('componentDidUpdate');
-	}
+	// componentDidUpdate() {
+	// 	console.log('componentDidUpdate');
+	// }
 
-	componentWillUnmount() {
-		clearInterval(this.timerID);
-		console.log('componentWillUnmount');
-	}
+	// componentWillUnmount() {
+	// 	clearInterval(this.timerID);
+	// 	console.log('componentWillUnmount');
+	// }
 
 	render () {
 		const { value, isDone, onClickDone, id, onClickDelete } = this.props;
@@ -40,10 +40,13 @@ class Item extends React.Component {
 						{value}
 					</div>
 				</div>
-				<div onClick={() => onClickDelete(id)} className={styles.delete_icon}>
-					<IconButton aria-label="delete">
-			  	    	<DeleteIcon />
-			  	    </IconButton>
+				<div 
+					onClick={() => onClickDelete(id)} 
+					className={styles.delete_icon}
+				>
+						<IconButton aria-label="delete">
+				  	    	<DeleteIcon />
+				  	    </IconButton>
 				</div>
 
 			</div>);

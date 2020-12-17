@@ -19,17 +19,17 @@ const style = {
 };
 
 class Footer extends React.Component {
-	componentDidMount () {
-		console.log('componentDidMount');
-	}
+	// componentDidMount () {
+	// 	console.log('componentDidMount');
+	// }
 
-	componentDidUpdate() {
-		console.log('componentDidUpdate');
-	}
+	// componentDidUpdate() {
+	// 	console.log('componentDidUpdate');
+	// }
 
-	componentWillUnmount() {
-		console.log('componentWillUnmount');
-	}
+	// componentWillUnmount() {
+	// 	console.log('componentWillUnmount');
+	// }
 	
 	render () {
 		const { count } = this.props;
