@@ -1,106 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import ItemList from '../ItemList/ItemList';
-import InputItem from '../InputItem/InputItem';
-import Footer from '../Footer/Footer';
+import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+import Todo from '../Todo/Todo';
+import About from '../About/About';
+import Contacts from '../Contacts/Contacts';
+
+import Paper from '@material-ui/core/Paper';
+import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+
 import styles from './App.module.css';
 
-const App = () => {
-	const initialState = {
-		items: [
-				{
-					value: 'cоздать новое приложение',
-					isDone: false,
-					id: 1
-				},
-				{
-					value: 'прописать props-ы',
-					isDone: false,
-					id: 2
-				},
-				{
-					value: 'помыть машину',
-					isDone: false,
-					id: 3
-				}
-		],
-		count: 3,
-		error: false
-	};
-	
-	const [items, setItems] = useState (initialState.items);
-  	const [count, setCount] = useState (initialState.count);
-  	const [error, setError] = useState (initialState.error);
-
-  	useEffect(() => {
-  		console.log('error update');
-  		return () => {
-  			console.clear()
-  		}
-  	}, [error]);
-
-  	useEffect(() => {
-  		console.log('update');
-  	});
-
-  	useEffect(() => {
-  		console.log('mount');
-  	}, []);
-
-	const onClickDone = id => {
-		const newItemList = items.map(item => {
-			const newItem = { ...item };
-			if (item.id === id) {
-				newItem.isDone = !item.isDone;
-			}
-			return newItem;
-		});
-		setItems(newItemList);
-	};
-
-	const onClickDelete = id => {
-		const newDeleteItem = items.filter(item => item.id !== id);
-		setItems(newDeleteItem);
-		setCount((count) => count - 1);
-	};
-
-	const onClickAdd = value => {
-		if (value !== '') {
-			setItems ([
-					...items,
-					{
-						value,
-						isDone: false,
-						id: count + 1
-					}
-			]);
-			setCount((count) => count + 1);
-		} else {
-			setError (true);
-			}
-		};
-		
-		return (
-			<div className={styles.wrap}>
-				<h1 className={styles.title}>Важные дела:</h1>
-				<InputItem onClickAdd={onClickAdd} error={error} />
-				<ItemList 
-					items={items} 
-					onClickDone={onClickDone}
-					onClickDelete={onClickDelete} 
-				/>
-				<Footer count={count} />
-			</div>);
+const style = {
+	fontFamily: "'Balsamiq Sans', cursive",
+	margin: '0 5px 0 0',
+	fontSize: '20px',
+	opacity: '0.5',
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #f50057 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 25,
+    padding: '0 30px',
+    boxShadow: '4px 1px 5px #4682B4',
 };
 
+const App = () => (
+	<Router>
+		<div className={styles.wrap}>
 
-App.defaultProps = {
-	isDone: false
-};
+			<div>
+				<MenuList className={styles.menu}>
+			    	<Link to='/' className={styles.link}><MenuItem style={style}>Обо мне</MenuItem></Link>
+			        <Link to='/todo' className={styles.link}><MenuItem style={style}>Список дел</MenuItem></Link>
+			        <Link to='/contacts' className={styles.link}><MenuItem style={style}>Контакты</MenuItem></Link>
+			    </MenuList>    
+			</div>
 
-App.propTypes = {
-	  isDone: PropTypes.bool,
-	  id: PropTypes.number
-};
+			<div className={styles.tab}>
+				<Route path='/' exact component={About} />
+				<Route path='/todo' component={Todo} />
+				<Route path='/contacts' component={Contacts} />
+			</div>
+					
+		</div>
+	</Router>
+);
 
 export default App;

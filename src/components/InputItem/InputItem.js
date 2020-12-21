@@ -42,11 +42,10 @@ class InputItem extends React.Component {
 		this.setState({ 
 			inputValue: ''
 		});
-		
-	}
+	};
 
 	render () {
-		const { onClickAdd } = this.props;
+		// const { onClickAdd } = this.props;
 		const fieldError = this.props.error;
 		let errorForm;
 		if (fieldError) {

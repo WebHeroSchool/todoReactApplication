@@ -32,7 +32,7 @@ class Footer extends React.Component {
 	// }
 	
 	render () {
-		const { count } = this.props;
+		const { count, id, onClickDeleteAll } = this.props;
 		return (
 			<div>
 				<div className={styles.counter}>
@@ -45,9 +45,15 @@ class Footer extends React.Component {
 						<Button style={style}>Выполненные</Button>
 					</ButtonGroup>
 				</div>
-				<div className={styles.delete}>
-					<Button style={style} variant="outlined" color="secondary">
-			  			Удалить выполненные дела
+				<div className={styles.delete}
+					onClick={() => onClickDeleteAll(id)}
+				>
+					<Button 
+						style={style} 
+						variant="outlined" 
+						color="secondary"	
+					>
+			  				Удалить выполненные дела
 					</Button>
 				</div>
 			</div>);
