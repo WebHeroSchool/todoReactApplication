@@ -17,7 +17,8 @@ const styleButton = {
     color: 'white',
     height: 25,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    background: '#3340b5',
+    boxShadow: '0 3px 5px 2px rgba(82, 90, 163)',
 };
 
 class InputItem extends React.Component {
@@ -45,7 +46,6 @@ class InputItem extends React.Component {
 	};
 
 	render () {
-		// const { onClickAdd } = this.props;
 		const fieldError = this.props.error;
 		let errorForm;
 		if (fieldError) {

@@ -25,13 +25,19 @@ const Todo = () => {
 					id: 3
 				}
 		],
-		count: 3,
-		error: false
+		count: 3, //активные
+		countCompleted: 0, //выполненные
+		countAll: 3, //все
+		error: false,
+		filter: 'all'
 	};
 	
 	const [items, setItems] = useState (initialState.items);
   	const [count, setCount] = useState (initialState.count);
+  	const [countAll, setCountAll] = useState (initialState.countAll);
+  	const [countCompleted, setCountCompleted] = useState (initialState.countCompleted);
   	const [error, setError] = useState (initialState.error);
+  	const [filter, setFilter] = useState (initialState.filter);
 
 
   	useEffect(() => {
@@ -57,36 +63,89 @@ const Todo = () => {
 			}
 			return newItem;
 		});
+
+		const newCount = newItemList.filter(newItem => newItem.isDone === false).length;
+		const newCountCompleted = newItemList.filter(newItem => newItem.isDone !== false).length;
+		const newCountAll = newItemList.length;
+
 		setItems(newItemList);
+		setCount(newCount);
+		setCountCompleted(newCountCompleted);
+		setCountAll(newCountAll);
 	};
 
+	const onClickFilter = (filter) => {
+		let filterItemList = (filter) => {
+			if (filter === 'active') {
+				return items.filter(item => item.isDone === false);
+			} if (filter === 'completed') {
+				return items.filter(item => item.isDone === true);
+			} else {
+				return items;
+			}
+		};
+		
+		setFilter(filterItemList);
+	};
+
+	// const onClickFilter = (name) => {
+	// 	let filterItemList;
+	// 	switch(name) {
+	// 		case 'all':
+	// 			filterItemList = items;
+	// 			break;
+	// 		case 'active':
+	// 			filterItemList = items.filter(item => item.isDone === false);
+	// 			break;
+	// 		case 'completed':
+	// 			filterItemList = items.filter(item => item.isDone === true);
+	// 			break;
+	// 	}
+
+	// 	setFilter(filterItemList);
+	// };
+
 	const onClickDeleteAll = id => {
-		const newDeleteAll = items.filter(item => item.isDone !== true);
+		const newDeleteAll = items.filter(item => item.isDone === false);
+		const newCount = newDeleteAll.length;
+		const newCountAll = newDeleteAll.length;
+
 		setItems(newDeleteAll);
-		setCount((count) => count - 1 );
-	}
+ 		setCount(newCount);
+		setCountCompleted(0);
+		setCountAll(newCountAll);
+	};
 
 	const onClickDelete = id => {
 		const newDeleteItem = items.filter(item => item.id !== id);
+
+		const newCount = newDeleteItem.filter(newItem => newItem.isDone === false).length;
+		const newCountCompleted = newDeleteItem.filter(newItem => newItem.isDone !== false).length;
+		const newCountAll = newDeleteItem.length;
+
 		setItems(newDeleteItem);
-		setCount((count) => count - 1);
+		setCount(newCount);
+		setCountCompleted(newCountCompleted);
+		setCountAll(newCountAll);
 	};
 
 	const onClickAdd = value => {
 		if (value !== '') {
-			setItems ([
+			const newItemList = [
 					...items,
 					{
 						value,
 						isDone: false,
 						id: count + 1
 					}
-			]);
+			];
+			setItems (newItemList);
 			setCount((count) => count + 1);
+			setCountAll((countAll) => countAll + 1);
 		} else {
 			setError (true);
 			}
-		};
+	};
 		
 		return (
 			<div className={styles.wrap}>
@@ -99,7 +158,8 @@ const Todo = () => {
 				/>
 				<Footer 
 					count={count}
-					onClickDeleteAll={onClickDeleteAll} 
+					onClickDeleteAll={onClickDeleteAll}
+					onClickFilter={onClickFilter}
 				/>
 			</div>);
 };

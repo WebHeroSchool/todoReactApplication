@@ -16,7 +16,7 @@ const style = {
 	margin: '0 5px 0 0',
 	fontSize: '20px',
 	opacity: '0.5',
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #f50057 90%)',
+	background: '#3340b5',
     borderRadius: 3,
     border: 0,
     color: 'white',

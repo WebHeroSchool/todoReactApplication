@@ -1,11 +1,11 @@
 .name {
-	color: #f50057;
+	color: #666569;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 .title {
-	color: #f50057;
+	color: #666569;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -14,7 +14,7 @@
 	margin: 5px 0 0 0;
 	display: block;
 	text-decoration: none;
-	color: #2F4F4F;
+	color: #3340b5;
 }
 .img {
 	width: 300px;
