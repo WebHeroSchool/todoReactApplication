@@ -29,15 +29,17 @@ const Todo = () => {
 		countCompleted: 0, //выполненные
 		countAll: 3, //все
 		error: false,
-		filter: 'all'
+		filterItems: 'all'
 	};
 	
 	const [items, setItems] = useState (initialState.items);
+	const [filteredItems, setFilteredItems] = useState (initialState.items);
+  	const [filterItems, setFilterItems] = useState (initialState.filterItems);
   	const [count, setCount] = useState (initialState.count);
   	const [countAll, setCountAll] = useState (initialState.countAll);
   	const [countCompleted, setCountCompleted] = useState (initialState.countCompleted);
   	const [error, setError] = useState (initialState.error);
-  	const [filter, setFilter] = useState (initialState.filter);
+  	
 
 
   	useEffect(() => {
@@ -74,18 +76,18 @@ const Todo = () => {
 		setCountAll(newCountAll);
 	};
 
-	const onClickFilter = (filter) => {
-		let filterItemList = (filter) => {
-			if (filter === 'active') {
+	const onClickFilter = (filterItems) => {
+		let filterItemList = (filterItems) => {
+			if (filterItems === 'active') {
 				return items.filter(item => item.isDone === false);
-			} if (filter === 'completed') {
+			} if (filterItems === 'completed') {
 				return items.filter(item => item.isDone === true);
 			} else {
 				return items;
 			}
 		};
 		
-		setFilter(filterItemList);
+		setFilteredItems(filterItemList);
 	};
 
 	// const onClickFilter = (name) => {
@@ -129,8 +131,28 @@ const Todo = () => {
 		setCountAll(newCountAll);
 	};
 
+	// const onClickAdd = value => {
+	// 	if (value !== '') {
+	// 		const newItemList = [
+	// 				...items,
+	// 				{
+	// 					value,
+	// 					isDone: false,
+	// 					id: count + 1
+	// 				}
+	// 		];
+	// 		setItems (newItemList);
+	// 		setCount((count) => count + 1);
+	// 		setCountAll((countAll) => countAll + 1);
+	// 	} else {
+	// 		setError (true);
+	// 		}
+	// };
+
 	const onClickAdd = value => {
-		if (value !== '') {
+		if (value === '' || items.some((item) => value === item.value)) {
+ 			setError (true);
+		} else {
 			const newItemList = [
 					...items,
 					{
@@ -142,9 +164,7 @@ const Todo = () => {
 			setItems (newItemList);
 			setCount((count) => count + 1);
 			setCountAll((countAll) => countAll + 1);
-		} else {
-			setError (true);
-			}
+		}
 	};
 		
 		return (

@@ -44,7 +44,7 @@ class About extends React.Component {
 		}).catch(error => {
 			this.setState({
 				isError: true,
-				error: error
+				error: 'Ошибка:' + error
 			})
 		});
 	}

@@ -31,7 +31,7 @@ class Footer extends React.Component {
 	// }
 	
 	render () {
-		const { count, id, onClickDeleteAll, onClickFilter /*onClickFilterComplet*/ } = this.props;
+		const { count, id, onClickDeleteAll, onClickFilter } = this.props;
 		return (
 			<div>
 				<div className={styles.counter}>

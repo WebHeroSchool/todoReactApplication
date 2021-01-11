@@ -35,7 +35,7 @@ class InputItem extends React.Component {
 	// }
 	
 	state = {
-		inputValue: ''
+		inputValue: '',
 	};
 
 	onButtonClick = () => {
@@ -49,7 +49,7 @@ class InputItem extends React.Component {
 		const fieldError = this.props.error;
 		let errorForm;
 		if (fieldError) {
-			errorForm = 'Ошибка: поле для ввода не может быть пустым'
+			errorForm = 'Ошибка: поле для ввода не может быть пустым или такая задача уже существует'
 		} else {
 			errorForm = ''
 		}
