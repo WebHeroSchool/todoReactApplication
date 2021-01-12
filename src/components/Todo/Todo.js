@@ -33,15 +33,12 @@ const Todo = () => {
 	};
 	
 	const [items, setItems] = useState (initialState.items);
-	const [filteredItems, setFilteredItems] = useState (initialState.items);
   	const [filterItems, setFilterItems] = useState (initialState.filterItems);
   	const [count, setCount] = useState (initialState.count);
   	const [countAll, setCountAll] = useState (initialState.countAll);
   	const [countCompleted, setCountCompleted] = useState (initialState.countCompleted);
   	const [error, setError] = useState (initialState.error);
   	
-
-
   	useEffect(() => {
   		console.log('error update');
   		return () => {
@@ -76,8 +73,7 @@ const Todo = () => {
 		setCountAll(newCountAll);
 	};
 
-	const onClickFilter = (filterItems) => {
-		let filterItemList = (filterItems) => {
+	const filterItemList = () => {
 			if (filterItems === 'active') {
 				return items.filter(item => item.isDone === false);
 			} if (filterItems === 'completed') {
@@ -86,26 +82,10 @@ const Todo = () => {
 				return items;
 			}
 		};
-		
-		setFilteredItems(filterItemList);
+
+	const onClickFilter = (element) => {
+		setFilterItems(element);
 	};
-
-	// const onClickFilter = (name) => {
-	// 	let filterItemList;
-	// 	switch(name) {
-	// 		case 'all':
-	// 			filterItemList = items;
-	// 			break;
-	// 		case 'active':
-	// 			filterItemList = items.filter(item => item.isDone === false);
-	// 			break;
-	// 		case 'completed':
-	// 			filterItemList = items.filter(item => item.isDone === true);
-	// 			break;
-	// 	}
-
-	// 	setFilter(filterItemList);
-	// };
 
 	const onClickDeleteAll = id => {
 		const newDeleteAll = items.filter(item => item.isDone === false);
@@ -131,24 +111,6 @@ const Todo = () => {
 		setCountAll(newCountAll);
 	};
 
-	// const onClickAdd = value => {
-	// 	if (value !== '') {
-	// 		const newItemList = [
-	// 				...items,
-	// 				{
-	// 					value,
-	// 					isDone: false,
-	// 					id: count + 1
-	// 				}
-	// 		];
-	// 		setItems (newItemList);
-	// 		setCount((count) => count + 1);
-	// 		setCountAll((countAll) => countAll + 1);
-	// 	} else {
-	// 		setError (true);
-	// 		}
-	// };
-
 	const onClickAdd = value => {
 		if (value === '' || items.some((item) => value === item.value)) {
  			setError (true);
@@ -166,15 +128,15 @@ const Todo = () => {
 			setCountAll((countAll) => countAll + 1);
 		}
 	};
-		
+
 		return (
 			<div className={styles.wrap}>
 				<h1 className={styles.title}>Важные дела:</h1>
 				<InputItem onClickAdd={onClickAdd} error={error} />
 				<ItemList 
-					items={items} 
 					onClickDone={onClickDone}
-					onClickDelete={onClickDelete} 
+					onClickDelete={onClickDelete}
+					filterItemList={filterItemList} 
 				/>
 				<Footer 
 					count={count}
@@ -183,7 +145,6 @@ const Todo = () => {
 				/>
 			</div>);
 };
-
 
 Todo.defaultProps = {
 	isDone: false
