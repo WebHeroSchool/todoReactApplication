@@ -129,21 +129,34 @@ const Todo = () => {
 		}
 	};
 
-		return (
+	const onUpdateItem = (value, id) => {
+		const newItemList = items.map(item => {
+			const newItem = { ...item };
+			if (item.id === id) {
+				newItem.value = value;
+			}
+			return newItem;
+		});
+		setItems(newItemList);
+	};
+
+	return (
 			<div className={styles.wrap}>
 				<h1 className={styles.title}>Важные дела:</h1>
 				<InputItem onClickAdd={onClickAdd} error={error} />
 				<ItemList 
 					onClickDone={onClickDone}
 					onClickDelete={onClickDelete}
-					filterItemList={filterItemList} 
+					filterItemList={filterItemList}
+					onUpdateItem={onUpdateItem} 
 				/>
 				<Footer 
 					count={count}
 					onClickDeleteAll={onClickDeleteAll}
 					onClickFilter={onClickFilter}
 				/>
-			</div>);
+			</div>
+	);
 };
 
 Todo.defaultProps = {

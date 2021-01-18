@@ -1,8 +1,26 @@
+.wrap {
+	margin: 0 30px 0 10px;
+}
+.prelouder {
+	margin: 50px 200px 0 200px;
+}
 .name {
 	color: #666569;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.email {
+	display: flex;
+	align-items: center;
+}
+.email__img {
+	width: 25px;
+}
+.email__link {
+	text-decoration: none;
+	margin-left: 5px;
+	color: #3340b5;
 }
 .title {
 	color: #666569;
@@ -16,6 +34,21 @@
 	text-decoration: none;
 	color: #3340b5;
 }
-.img {
+.avatar__img {
 	width: 300px;
+}
+.disc {
+	width: 400px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.contact {
+	height: 140px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.contact__img {
+	width: 40px;
 }
