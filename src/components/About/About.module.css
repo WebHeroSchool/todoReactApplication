@@ -28,11 +28,29 @@
 	justify-content: center;
 	align-items: center;
 }
+.list {
+	padding: 0;
+}
+.link:hover {
+	cursor: pointer;
+	background: #7c72e0;
+}
 .link {
-	margin: 5px 0 0 0;
 	display: block;
+	background: #959dc7;
+	border-radius: 5px;
+	margin: 5px 0 0 0;
 	text-decoration: none;
 	color: #3340b5;
+	height: 45px;
+	transition: .5s linear;
+}
+.item {
+	list-style-type: none;
+	margin: 0 0 5px 0;
+}
+.language {
+	margin: 0 0 0 10px;
 }
 .avatar__img {
 	width: 300px;
@@ -51,4 +69,20 @@
 }
 .contact__img {
 	width: 40px;
+}
+.wrap__arrow {
+	display: flex;
+	justify-content: flex-end;
+}
+.arrow1__img {
+	cursor: pointer;
+	width: 25px;
+	border-radius: 5px;
+	margin: 0 5px 0 0;
+	transform: rotate(180deg);
+}
+.arrow2__img {
+	cursor: pointer;
+	width: 25px;
+	border-radius: 5px;
 }
