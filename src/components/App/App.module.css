@@ -1,3 +1,6 @@
+body {
+	background-image: url(https://elite-decor.com.ua/wp-content/uploads/2020/10/Oboi-Engblad-Co-White-Light-8973-foto.jpg);
+}
 .wrap {
 	display: flex;
 	flex-direction: column;
@@ -9,14 +12,24 @@
 }
 .menu {
 	display: flex;
+	align-items: center;
 }
 .link {
 	text-decoration: none;
 }
 .tab {
 	min-height: 500px;
-	width: 500px;
+	max-width: 700px;
 	background-color: #B0C4DE;
 	border-radius: 10px;
 	box-shadow: 5px 5px 7px #4682B4;
+}
+.menu__img {
+	margin-top: 5px;
+}
+.img {
+	width: 100px;
+	height: 40px;
+	opacity: 80%;
+	border-radius: 5px;
 }

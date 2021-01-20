@@ -8,31 +8,19 @@ const style = {
 	fontFamily: "'Balsamiq Sans', cursive",
 	margin: '0 5px 0 0',
 	fontSize: '10px',
-	opacity: '0.5',
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #f50057 90%)',
+	background: '#3340b5',
     borderRadius: 3,
     border: 0,
     color: 'white',
     height: 25,
     padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    boxShadow: '0 3px 5px 2px rgba(82, 90, 163)',
 };
 
 class Footer extends React.Component {
-	// componentDidMount () {
-	// 	console.log('componentDidMount');
-	// }
-
-	// componentDidUpdate() {
-	// 	console.log('componentDidUpdate');
-	// }
-
-	// componentWillUnmount() {
-	// 	console.log('componentWillUnmount');
-	// }
 	
 	render () {
-		const { count, id, onClickDeleteAll } = this.props;
+		const { count, id, onClickDeleteAll, onClickFilter } = this.props;
 		return (
 			<div>
 				<div className={styles.counter}>
@@ -40,13 +28,22 @@ class Footer extends React.Component {
 				</div>
 				<div className={styles.filter}>
 					<ButtonGroup color="secondary" aria-label="outlined secondary button group">
-						<Button style={style}>Все</Button>
-						<Button style={style}>Активные</Button>
-						<Button style={style}>Выполненные</Button>
+						<Button style={style}
+								label="all"
+								onClick={() => onClickFilter('all')}
+						>Все</Button>
+						<Button style={style}
+								label="active"
+								onClick={() => onClickFilter('active')}
+						>Активные</Button>
+						<Button style={style}
+								label="completed"
+								onClick={() => onClickFilter('completed')}
+						>Выполненные</Button>
 					</ButtonGroup>
 				</div>
 				<div className={styles.delete}
-					onClick={() => onClickDeleteAll(id)}
+					 onClick={() => onClickDeleteAll(id)}
 				>
 					<Button 
 						style={style} 

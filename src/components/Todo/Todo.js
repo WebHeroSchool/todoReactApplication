@@ -8,7 +8,7 @@ import styles from './Todo.module.css';
 
 const Todo = () => {
 	const initialState = {
-		items: [
+		items: JSON.parse(localStorage.getItem('items')) || [
 				{
 					value: 'cоздать новое приложение',
 					isDone: false,
@@ -25,29 +25,53 @@ const Todo = () => {
 					id: 3
 				}
 		],
-		count: 3,
-		error: false
+		count: JSON.parse(localStorage.getItem('count')) || 3, //активные
+		countCompleted: JSON.parse(localStorage.getItem('countCompleted')) || 0, //выполненные
+		countAll: JSON.parse(localStorage.getItem('countAll')) || 3, //все
+		error: JSON.parse(localStorage.getItem('error')) || false,
+		filterItems: JSON.parse(localStorage.getItem('filterItems')) || 'all'
 	};
 	
 	const [items, setItems] = useState (initialState.items);
+  	const [filterItems, setFilterItems] = useState (initialState.filterItems);
   	const [count, setCount] = useState (initialState.count);
+  	const [countAll, setCountAll] = useState (initialState.countAll);
+  	const [countCompleted, setCountCompleted] = useState (initialState.countCompleted);
   	const [error, setError] = useState (initialState.error);
+  	
+  	// useEffect(() => {
+  	// 	console.log('error update');
+  	// 	return () => {
+  	// 		console.clear()
+  	// 	}
+  	// }, [error]);
 
+  	// useEffect(() => {
+  	// 	console.log('update');
+  	// });
+
+  	// useEffect(() => {
+  	// 	console.log('mount');
+  	// }, []);
 
   	useEffect(() => {
-  		console.log('error update');
-  		return () => {
-  			console.clear()
-  		}
-  	}, [error]);
-
-  	useEffect(() => {
-  		console.log('update');
+  		localStorage.setItem('items', JSON.stringify(items));
   	});
-
   	useEffect(() => {
-  		console.log('mount');
-  	}, []);
+  		localStorage.setItem('count', JSON.stringify(count));
+  	});
+  	useEffect(() => {
+  		localStorage.setItem('countCompleted', JSON.stringify(countCompleted));
+  	});
+  	useEffect(() => {
+  		localStorage.setItem('countAll', JSON.stringify(countAll));
+  	});
+  	useEffect(() => {
+  		localStorage.setItem('error', JSON.stringify(error));
+  	});
+  	useEffect(() => {
+  		localStorage.setItem('filterItems', JSON.stringify(filterItems));
+  	});
 
 	const onClickDone = id => {
 		const newItemList = items.map(item => {
@@ -57,53 +81,103 @@ const Todo = () => {
 			}
 			return newItem;
 		});
+
+		const newCount = newItemList.filter(newItem => newItem.isDone === false).length;
+		const newCountCompleted = newItemList.filter(newItem => newItem.isDone !== false).length;
+		const newCountAll = newItemList.length;
+
 		setItems(newItemList);
+		setCount(newCount);
+		setCountCompleted(newCountCompleted);
+		setCountAll(newCountAll);
+	};
+
+	const filterItemList = () => {
+			if (filterItems === 'active') {
+				return items.filter(item => item.isDone === false);
+			} if (filterItems === 'completed') {
+				return items.filter(item => item.isDone === true);
+			} else {
+				return items;
+			}
+		};
+
+	const onClickFilter = (element) => {
+		setFilterItems(element);
 	};
 
 	const onClickDeleteAll = id => {
-		const newDeleteAll = items.filter(item => item.isDone !== true);
+		const newDeleteAll = items.filter(item => item.isDone === false);
+		const newCount = newDeleteAll.length;
+		const newCountAll = newDeleteAll.length;
+
 		setItems(newDeleteAll);
-		setCount((count) => count - 1 );
-	}
+ 		setCount(newCount);
+		setCountCompleted(0);
+		setCountAll(newCountAll);
+	};
 
 	const onClickDelete = id => {
 		const newDeleteItem = items.filter(item => item.id !== id);
+
+		const newCount = newDeleteItem.filter(newItem => newItem.isDone === false).length;
+		const newCountCompleted = newDeleteItem.filter(newItem => newItem.isDone !== false).length;
+		const newCountAll = newDeleteItem.length;
+
 		setItems(newDeleteItem);
-		setCount((count) => count - 1);
+		setCount(newCount);
+		setCountCompleted(newCountCompleted);
+		setCountAll(newCountAll);
 	};
 
 	const onClickAdd = value => {
-		if (value !== '') {
-			setItems ([
+		if (value === '' || items.some((item) => value === item.value)) {
+ 			setError (true);
+		} else {
+			const newItemList = [
 					...items,
 					{
 						value,
 						isDone: false,
 						id: count + 1
 					}
-			]);
+			];
+			setError (false);
+			setItems (newItemList);
 			setCount((count) => count + 1);
-		} else {
-			setError (true);
+			setCountAll((countAll) => countAll + 1);
+		}
+	};
+
+	const onUpdateItem = (value, id) => {
+		const newItemList = items.map(item => {
+			const newItem = { ...item };
+			if (item.id === id) {
+				newItem.value = value;
 			}
-		};
-		
-		return (
+			return newItem;
+		});
+		setItems(newItemList);
+	};
+
+	return (
 			<div className={styles.wrap}>
 				<h1 className={styles.title}>Важные дела:</h1>
 				<InputItem onClickAdd={onClickAdd} error={error} />
 				<ItemList 
-					items={items} 
 					onClickDone={onClickDone}
-					onClickDelete={onClickDelete} 
+					onClickDelete={onClickDelete}
+					filterItemList={filterItemList}
+					onUpdateItem={onUpdateItem} 
 				/>
 				<Footer 
 					count={count}
-					onClickDeleteAll={onClickDeleteAll} 
+					onClickDeleteAll={onClickDeleteAll}
+					onClickFilter={onClickFilter}
 				/>
-			</div>);
+			</div>
+	);
 };
-
 
 Todo.defaultProps = {
 	isDone: false
