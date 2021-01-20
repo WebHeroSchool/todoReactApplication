@@ -103,11 +103,11 @@ class About extends React.Component {
 		 				<h1 className={styles.title}>My repositories</h1>		
 		 				{!isLoading && <> 
 					 					<ol className={styles.list}>
-					 						{repoListInPage.map(repo => (<a className={styles.link} href={repo.html_url}>
-					 													<li className={styles.item} key={repo.id}>
+					 						{repoListInPage.map(repo => (<a className={styles.link} key={repo.id} href={repo.html_url}>
+					 													<li className={styles.item}>
 										 									{repo.name}
 					 													</li>
-					 													<p className={styles.language} key={repo.node_id}>
+					 													<p className={styles.language}>
 					 														Language: {repo.language}
 					 													</p>
 					 												</a>))}
